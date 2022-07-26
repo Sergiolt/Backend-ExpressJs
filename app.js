@@ -9,7 +9,9 @@ dotenv.config();
 const app = express();
 dbConnection();
 app.use(cors());
+app.use(express.json());
 
+//Routes
 app.use("/api", require("./routes/"));
 
 app.get("/", (req, res) => {

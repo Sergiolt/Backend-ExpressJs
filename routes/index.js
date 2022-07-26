@@ -11,7 +11,6 @@ const removeExtension = (file) => {
 fs.readdirSync(PATH_ROUTES).map((file) => {
   const name = removeExtension(file);
   if (name !== "index") {
-    console.log(`Routing ${name}`);
     router.use(`/${name}`, require(`./${name}`));
   }
 });
