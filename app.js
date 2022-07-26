@@ -10,6 +10,7 @@ const app = express();
 dbConnection();
 app.use(cors());
 app.use(express.json());
+app.use(express.static("storage"));
 
 //Routes
 app.use("/api", require("./routes/"));
