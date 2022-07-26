@@ -1,4 +1,5 @@
 const { storageModel } = require("../models");
+const PUBLIC_URL = process.env.PUBLIC_URL;
 
 const getFiles = async (req, res) => {
   const data = await storageModel.find({});
@@ -8,14 +9,15 @@ const getFile = (req, res) => {
   const { id } = req.params;
   res.send(`TRACK ${id}`);
 };
+
 const createFile = async (req, res) => {
-  const { body, file } = req;
+  const { file } = req;
   const fileData = {
-    file: file.filename,
-    url: file.path,
+    filename: file.filename,
+    url: `${PUBLIC_URL}/${file.filename}`,
   };
-  const data = await storageModel.create(body);
-  res.send(file);
+  const data = await storageModel.create(fileData);
+  res.send({ data });
 };
 const updateFile = (req, res) => {
   const { id } = req.params;
