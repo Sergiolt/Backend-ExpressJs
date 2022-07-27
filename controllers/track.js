@@ -9,7 +9,7 @@ const getTrack = (req, res) => {
   res.send(`TRACK ${id}`);
 };
 const createTrack = async (req, res) => {
-  const { body } = req;
+  const body = matchedData(req.body);
   const data = await tracksModel.create(body);
   res.send(data);
 };
