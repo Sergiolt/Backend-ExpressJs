@@ -3,8 +3,8 @@ const { check, validationResult } = require("express-validator");
 const validatorRegisterUser = [
   check("name").exists().notEmpty().isLength({ min: 2, max: 99 }),
   check("age").exists().notEmpty().isNumeric(),
-  check("password").exists().notEmpty().isEmail(),
-  check("email").exists().notEmpty().isLength({ min: 3, max: 15 }),
+  check("password").exists().notEmpty().isLength({ min: 3, max: 15 }),
+  check("email").exists().notEmpty().isEmail(),
   (req, res, next) => {
     try {
       validationResult(req).throw();
