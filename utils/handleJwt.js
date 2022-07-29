@@ -7,22 +7,24 @@ const JWT_SECRET = process.env.JWT_SECRET;
  * @returns A signature
  */
 const signToken = async (user) => {
-  const signature = await jwt.sign(
-    { _id: user._id, role: user.role },
-    JWT_SECRET,
-    {
-      expiresIn: "2h",
-    }
-  );
-  return signature;
+	const signature = await jwt.sign(
+		{ _id: user._id, role: user.role },
+		JWT_SECRET,
+		{
+			expiresIn: "2h",
+		}
+	);
+	return signature;
 };
 const verifyToken = async (token) => {
-  try {
-    jwt.verify(token, JWT_SECRET);
-  } catch (error) {}
+	try {
+		return	jwt.verify(token, JWT_SECRET);
+	} catch (error) {
+		return null;
+	}
 };
 
 module.exports = {
-  signToken,
-  verifyToken,
+	signToken,
+	verifyToken,
 };

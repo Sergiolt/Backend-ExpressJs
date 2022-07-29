@@ -1,7 +1,7 @@
 const { usersModel } = require("../models");
 const { matchedData } = require("express-validator");
 const { encrypt, compare } = require("../utils/handlePassword");
-const { signToken, verifyToken } = require("../utils/handleJwt");
+const { signToken } = require("../utils/handleJwt");
 const { handleResponseError } = require("../utils/handleErrors");
 
 const getUsers = async (req, res) => {
@@ -18,17 +18,18 @@ const getUser = async (req, res) => {
 const loginUser = async (req, res) => {
 	try {
 		const { password, email } = matchedData(req);
-		const user = await usersModel.findOne({ email: email });
+		const user = await usersModel.findOne({ email: email }).select("password name role");
 		if (!user) {
 			handleResponseError(res, 403, "Password or email is incorrect");
 			return;
 		}
-
 		const isPasswordValid = await compare(password, user.password);
 		if (!isPasswordValid) {
 			handleResponseError(res, 403, "Password or email is incorrect");
 			return;
 		}
+
+		user.set("password", undefined);
 
 		const tokenJwt = await signToken(user);
 
@@ -58,15 +59,11 @@ const updateUser = async (req, res) => {
 	res.send(data);
 };
 
-const deleteUser = (req, res) => {
-	return;
-};
 
 module.exports = {
 	getUsers,
 	registerUser,
 	updateUser,
-	deleteUser,
 	getUser,
 	loginUser,
 };

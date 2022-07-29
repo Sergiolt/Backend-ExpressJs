@@ -5,14 +5,13 @@
  * @param [message=Something happened] - The error message to send back to the client.
  */
 const handleResponseError = (
-  res,
-  code = 500,
-  message = "Something happened"
+	res,
+	code = 500,
+	message = "Something happened"
 ) => {
-  res.status(code);
-  res.send({ error: message });
+	res.status(code);
+	res.send({ error: message });
 };
-
 module.exports = {
-  handleResponseError,
+	handleResponseError,
 };
