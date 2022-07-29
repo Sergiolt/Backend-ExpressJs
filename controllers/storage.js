@@ -7,7 +7,7 @@ const getFiles = async (req, res) => {
 };
 const getFile = (req, res) => {
   const { id } = req.params;
-  res.send(`TRACK ${id}`);
+  const data = storageModel.findById(id);
 };
 
 const createFile = async (req, res) => {

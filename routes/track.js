@@ -1,10 +1,10 @@
 const express = require("express");
 const {
-  getTracks,
-  getTrack,
-  createTrack,
-  deleteTrack,
-  updateTrack,
+	getTracks,
+	getTrack,
+	createTrack,
+	deleteTrack,
+	updateTrack,
 } = require("../controllers/track");
 
 const { validatorCreateTrack } = require("../validators/track.js");
